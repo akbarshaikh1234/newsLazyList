@@ -21,6 +21,16 @@
                         <label for="newsTitle">Description</label>
                         <textarea class="form-control" name="" id="" cols="30" rows="10" formControlName="description"></textarea>
                     </div>
+
+                    <div class="force-to-the-bottom">
+                        <tag-input >
+                          <tag-input-dropdown
+                            [autocompleteItems]="items"
+                            [showDropdownIfEmpty]="true"
+                            [dynamicUpdate]="false">
+                          </tag-input-dropdown>
+                        </tag-input>
+                      </div>
                 </form>
             </div>
             <div class="modal-footer">

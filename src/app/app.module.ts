@@ -9,7 +9,9 @@ import { NewslistService } from './service/newslist.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalInsertComponent } from './modal-insert/modal-insert.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { TagInputModule } from 'ngx-chips';
+import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MaterialModule } from './shared/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TagInputModule,
+    MaterialModule
   ],
   providers: [NewslistService],
   bootstrap: [AppComponent]

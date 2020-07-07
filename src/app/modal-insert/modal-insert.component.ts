@@ -15,6 +15,10 @@ export class ModalInsertComponent implements OnInit {
     private fb: FormBuilder,
     private newsSer: NewslistService) { }
 
+    public items = [
+      'pizza',
+      'ppsdas','dasdasd','dasdiiads'
+    ];
   ngOnInit(): void {
     this.newsAddForm = this.fb.group({
       title: ['', Validators.required],
@@ -40,5 +44,9 @@ export class ModalInsertComponent implements OnInit {
       }).catch(error => {
         console.log(error);
       });
+  }
+
+  onItemAdded(e){
+    console.log(e);
   }
 }

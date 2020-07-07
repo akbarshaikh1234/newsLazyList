@@ -7,3 +7,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .display-flex{
     display: flex;
 }
+
+
+.modal-backdrop{
+    z-index: 800;
+}
+
+.modal{
+    z-index: 850;
+}
