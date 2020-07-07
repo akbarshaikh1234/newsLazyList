@@ -8,7 +8,6 @@ mongoose.connect(process.env.DB, {
     useUnifiedTopology: true
 })
 .then(() => {
-
     const app = express();
 
     app.use(express.json());

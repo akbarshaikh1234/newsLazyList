@@ -41,39 +41,40 @@ router.post("/articles", async (req, res, next) => {
 })
 
 router.post("/",uploads.single('newsImage'), async (req, res, next) => {
-
-    let newsData = {
-        title:req.body.title,
-        description:req.body.description,
-        image:req.file.path
-    }
-
-    News.create(newsData)
-    .then( doc => {
+    try{
+        let newsData = {
+            title:req.body.title,
+            description:req.body.description,
+            image:req.file.path
+        }
+    
+        const result = await News.create(newsData);
+        if(!result)
+            throw 'No Records Added';
+        
         res.status(200).send({
             statusCode:200,
-            data:doc
+            data:result
         });
-    }).catch( err => {
+    } catch (error) {
         res.status(404).send({
             statusCode:404,
             message: 'Error Occured'
         })
-    })
+    }
 })
 
 router.delete("/:id", async (req, res) => {
     try{
         const result = await News.deleteOne({_id : req.params.id});
         console.log(result);
-        if(result.ok && result.deletedCount){
-            res.status(200).send({
-                statusCode:200,
-                message:"Successful deletion"
-            });
-        } else {
-            throw new Error('No Record Deleted');
-        }
+        if(!result.ok || !result.deletedCount)
+            throw 'No entries Found';
+
+        res.status(200).send({
+            statusCode:200,
+            message:"Successful deletion"
+        });
        
     } catch (error){
         res.status(404).send({
