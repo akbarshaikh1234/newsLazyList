@@ -18,18 +18,18 @@ const storage = multer.diskStorage({
 const uploads = multer({storage:storage})
 
 router.post("/articles", async (req, res, next) => {
-    console.log(req.body)
-    
     let skips = req.body.page_size * (req.body.page_num - 1);
 
     try{
-        const totalEntries = await News.find().count();
+        const totalEntries = await News.estimatedDocumentCount();
         const news = await News.find().skip(skips).limit(req.body.page_size)
 
         res.send({
             statusCode:200,
             totalEntries:totalEntries,
-            data:news
+            current_page:req.body.page_num,
+            page_size:req.body.page_size,
+            data:news,
         });
     } catch(error){
         res.status(404).send({
@@ -63,7 +63,26 @@ router.post("/",uploads.single('newsImage'), async (req, res, next) => {
 })
 
 router.delete("/:id", async (req, res) => {
-  console.log(req.params)
+    try{
+        const result = await News.deleteOne({_id : req.params.id});
+        console.log(result);
+        if(result.ok && result.deletedCount){
+            res.status(200).send({
+                statusCode:200,
+                message:"Successful deletion"
+            });
+        } else {
+            throw new Error('No Record Deleted');
+        }
+       
+    } catch (error){
+        res.status(404).send({
+            statusCode:404,
+            message: 'Error Occured | ' + error
+        })
+    }
+  
+  
 })
 
 module.exports = router
