@@ -1,0 +1,23 @@
+
+<div class="page-size-selector">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#newsModal">Add news</button>
+    <select name="" id="" (change)="pageSizeChange($event.target.value)">
+        <option *ngFor="let option of pageOption" [value]="option">{{option}}</option>
+    </select>
+</div>
+
+<div class="news-container">
+    <news-cards *ngFor="let article of newsData" [article]="article" (delete)="deletedData($event)"></news-cards>
+</div>
+
+<div class="buttons_container">
+    <button class="btn btn-primary button_back" [ngClass]="{'disable': page === 1}" [disabled]="page === 1" (click)="newsList(-1)">
+        <img src="/assets/icons/chevron_left.svg" alt="">
+    </button>
+    <button class="btn btn-primary button_back" [ngClass]="{'disable':page === totalPages}" [disabled]="page === totalPages" (click)="newsList(1)" >
+        <img src="/assets/icons/chevron_right.svg" alt="">
+    </button>
+</div>
+
+
+<modal-insert></modal-insert>

@@ -1,0 +1,42 @@
+
+.news-card{
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bcbcbc;
+    margin: 26px auto;
+    width: 95%;
+    .data-container{
+        width:70vw;
+        text-align: center;
+        .desc{
+            text-align: left;
+            font-size: 18px;
+            font-weight: 100
+        }
+    }
+    .seperator{
+        height: 120px;
+        max-height: 800px;
+        width: 1px;
+        background: #d8d8d8;
+        justify-self: center;
+        align-self: center;
+        margin: 10px;
+    }
+    .image-container{
+        width:200px;
+        display: flex;
+        align-items: center;
+        img{
+            width:100%
+        }
+    }
+}
+
+
+.modify{
+    position: absolute;
+    right: 17px;
+    cursor: pointer;
+}
+

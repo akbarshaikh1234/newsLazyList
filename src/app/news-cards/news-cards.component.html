@@ -1,1 +1,19 @@
-<p>news-cards works!</p>
+<div class="col-md-12 display-flex news-card">
+    <div class="image-container">
+        <img class="articleImg" src="/assets/images/placeholder.jpeg" [data-src]="article.image" alt="">
+    </div>
+    <div class="seperator"></div>
+    <div class="data-container">
+        <div class="title">
+            <h1>{{article.title}}</h1>
+        </div>
+        <div class="desc">
+            {{article.description}}
+        </div>
+    </div>
+    <div class="modify">
+        <div class="delete">
+            <img src="/assets/icons/delete.svg"  (click)="deleteData(article)" alt="">
+        </div>
+    </div>
+</div>

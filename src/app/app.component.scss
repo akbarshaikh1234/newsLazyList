@@ -1,0 +1,22 @@
+.page-size-selector {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    width: 97%;
+}
+
+.buttons_container{
+    display: flex;
+    justify-content: space-evenly;
+
+    .button_back {
+        border: none;
+        outline:none;
+        box-shadow: 0px 2px 5px 0px #bcbaba;
+    }
+    .button_back.disable{
+        box-shadow:none !important;
+    }
+
+}
