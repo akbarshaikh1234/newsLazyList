@@ -18,11 +18,11 @@ const storage = multer.diskStorage({
 const uploads = multer({storage:storage})
 
 router.post("/articles", async (req, res, next) => {
-    let skips = req.body.page_size * (req.body.page_num - 1);
+    let hops = req.body.page_size * (req.body.page_num - 1);
 
     try{
         const totalEntries = await News.estimatedDocumentCount();
-        const news = await News.find().skip(skips).limit(req.body.page_size)
+        const news = await News.find().skip(hops).limit(req.body.page_size)
 
         res.send({
             statusCode:200,
