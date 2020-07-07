@@ -37,15 +37,6 @@ router.post("/articles", async (req, res, next) => {
             message:error
         });
     }
-   
-    // .then(data => {
-        
-    // }).catch(err => {
-    //     res.status(404).json({
-    //         statusCode:404,
-    //         message:err
-    //     });
-    // });
     
 })
 
