@@ -18,11 +18,11 @@ const storage = multer.diskStorage({
 const uploads = multer({storage:storage})
 
 router.post("/articles", async (req, res, next) => {
-    let hops = req.body.page_size * (req.body.page_num - 1);
+    let hops = parseInt(req.body.page_size) * (parseInt(req.body.page_num) - 1);
 
     try{
         const totalEntries = await News.estimatedDocumentCount();
-        const news = await News.find().skip(hops).limit(req.body.page_size)
+        const news = await News.find().skip(hops).limit(parseInt(req.body.page_size))
 
         res.send({
             statusCode:200,
@@ -42,10 +42,11 @@ router.post("/articles", async (req, res, next) => {
 
 router.post("/",uploads.single('newsImage'), async (req, res, next) => {
     try{
+        console.log(req)
         let newsData = {
             title:req.body.title,
             description:req.body.description,
-            image:req.file.path
+            image:`http://localhost:3000/${req.file.path}`
         }
     
         const result = await News.create(newsData);
