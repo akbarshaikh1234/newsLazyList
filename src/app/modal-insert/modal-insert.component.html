@@ -15,27 +15,44 @@
                     </div>
                     <div class="form-group">
                         <label for="newsTitle">Title</label>
-                        <input type="text" class="form-control" id="newsTitle" placeholder="News Title goes here ..." formControlName="title">
+                        <input type="text" class="form-control" id="newsTitle" placeholder="News Title goes here ..."
+                            formControlName="title">
                     </div>
                     <div class="form-group">
                         <label for="newsTitle">Description</label>
-                        <textarea class="form-control" name="" id="" cols="30" rows="10" formControlName="description"></textarea>
+                        <textarea class="form-control" name="" id="" cols="30" rows="10"
+                            formControlName="description"></textarea>
                     </div>
-
-                    <div class="force-to-the-bottom">
-                        <tag-input >
-                          <tag-input-dropdown
-                            [autocompleteItems]="items"
-                            [showDropdownIfEmpty]="true"
-                            [dynamicUpdate]="false">
-                          </tag-input-dropdown>
-                        </tag-input>
-                      </div>
+                    
+                    <mat-form-field class="tag-list">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let chip of chips"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(chip)">
+                            {{chip}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            placeholder="+Tags"
+                            #tagInput
+                            [matAutocomplete]="auto"
+                            formControlName="tags"
+                            [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                            {{tag}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="showData()">Save changes</button>
+                <button type="button" class="btn btn-primary" (click)="sendData()">Save changes</button>
             </div>
         </div>
     </div>

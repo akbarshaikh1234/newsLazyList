@@ -22,7 +22,7 @@ router.post("/articles", async (req, res, next) => {
 
     try{
         const totalEntries = await News.estimatedDocumentCount();
-        const news = await News.find().skip(hops).limit(parseInt(req.body.page_size))
+        const news = await News.find().skip(hops).limit(parseInt(req.body.page_size));
 
         res.send({
             statusCode:200,
@@ -42,11 +42,11 @@ router.post("/articles", async (req, res, next) => {
 
 router.post("/",uploads.single('newsImage'), async (req, res, next) => {
     try{
-        console.log(req)
         let newsData = {
             title:req.body.title,
             description:req.body.description,
-            image:`http://localhost:3000/${req.file.path}`
+            image:`http://localhost:3000/${req.file.path}`,
+            tags:JSON.parse(req.body.tags)
         }
     
         const result = await News.create(newsData);
@@ -68,7 +68,6 @@ router.post("/",uploads.single('newsImage'), async (req, res, next) => {
 router.delete("/:id", async (req, res) => {
     try{
         const result = await News.deleteOne({_id : req.params.id});
-        console.log(result);
         if(!result.ok || !result.deletedCount)
             throw 'No entries Found';
 

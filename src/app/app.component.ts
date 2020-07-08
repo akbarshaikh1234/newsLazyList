@@ -52,8 +52,7 @@ export class AppComponent implements OnInit{
     this.getNewsList();
   }
 
-  deletedData(data){
-    console.log("deleted data :",data);
+  refresh(data){
     this.getNewsList();
   }
 }

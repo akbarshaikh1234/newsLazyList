@@ -6,12 +6,25 @@
     margin: 26px auto;
     width: 95%;
     .data-container{
+        position: relative;
         width:70vw;
         text-align: center;
         .desc{
             text-align: left;
             font-size: 18px;
-            font-weight: 100
+            font-weight: 100;
+            margin-bottom: 35px;
+        }
+        .tags{
+            position: absolute;
+            bottom:0;
+            right:0;
+            .tag-chip{
+                margin: 5px;
+                padding: 5px 14px;
+                background: #eee;
+                border-radius: 25px;
+            }
         }
     }
     .seperator{

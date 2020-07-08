@@ -7,10 +7,10 @@
 </div>
 
 <div class="news-container">
-    <news-cards *ngFor="let article of newsData" [article]="article" (delete)="deletedData($event)"></news-cards>
+    <news-cards *ngFor="let article of newsData" [article]="article" (delete)="refresh($event)"></news-cards>
 </div>
 
-<div class="buttons_container">
+<div class="buttons_container" *ngIf="newsData.length" >
     <button class="btn btn-primary button_back" [ngClass]="{'disable': page === 1}" [disabled]="page === 1" (click)="newsList(-1)">
         <img src="/assets/icons/chevron_left.svg" alt="">
     </button>
@@ -20,4 +20,4 @@
 </div>
 
 
-<modal-insert></modal-insert>
+<modal-insert (inserted)="refresh($event)" ></modal-insert>
